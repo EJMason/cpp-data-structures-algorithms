@@ -5,28 +5,44 @@ using std::vector;
 using std::cin;
 using std::cout;
 
-int MaxPairwiseProduct(const vector<int>& numbers) {
-  int result = 0;
-  int n = numbers.size();
-  for (int i = 0; i < n; ++i) {
-    for (int j = i + 1; j < n; ++j) {
-      if (numbers[i] * numbers[j] > result) {
-        result = numbers[i] * numbers[j];
-      }
-    }
-  }
-  return result;
+void swap(int &big, int &small) {
+    int temp = big;
+    big = small;
+    small = temp;
 }
 
+long long MaxPairwiseProduct(const vector<int>& numbers) {
+    int firstBiggest = 0;
+    int secondBiggest = 0;
+
+    int length = numbers.size();
+
+    for (int i = 0; i < length; i++) {
+        if (numbers[i] > secondBiggest) {
+            secondBiggest = numbers[i];
+
+            if (secondBiggest > firstBiggest) {
+                swap(secondBiggest, firstBiggest);
+            }
+        }
+    }
+    return (long long)firstBiggest * secondBiggest;
+}
+
+
+
 int main() {
+    // =========== setup / input ========== //
     int n;
     cin >> n;
-    vector<int> numbers(n);
+    vector<int> numbers((unsigned long) n);
     for (int i = 0; i < n; ++i) {
         cin >> numbers[i];
     }
 
-    int result = MaxPairwiseProduct(numbers);
-    cout << result << "\n";
+    // =========== invocation ========== //
+    long long result = MaxPairwiseProduct(numbers);
+    cout << result << std::endl;
     return 0;
 }
+
