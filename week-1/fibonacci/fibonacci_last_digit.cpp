@@ -11,10 +11,10 @@ int get_fibonacci_last_digit(int n) {
     numbers[1] = 1;
 
     for (int i = 2; i <= n; ++i) {
-        numbers[i % 2] = numbers[0] + numbers[1];
+        numbers[i % 2] = (numbers[0] + numbers[1]) % 10;
     }
 
-    return numbers[n % 2] % 10;
+    return numbers[n % 2];
 }
 
 // int fibonacci_naive(int n) {
@@ -28,7 +28,7 @@ int get_fibonacci_last_digit(int n) {
 //     int a;
 //     int b;
 //     for (int n = 0; n < 20; ++n) {
-//         a = get_fibonacci_last_digit_naive(n);
+//         a = get_fibonacci_last_digit(n);
 //         b = fibonacci_naive(n) % 10;
 //         std::cout << "answer: " << a << "    " << b << std::endl;
 //         assert(a == b);
@@ -40,5 +40,6 @@ int main() {
     std::cin >> n;
     int c = get_fibonacci_last_digit(n);
     std::cout << c << '\n';
+    // test_solution();
 }
 
