@@ -1,24 +1,44 @@
 #include <iostream>
+#include <cassert>
 
-int get_fibonacci_last_digit_naive(int n) {
+int get_fibonacci_last_digit(int n) {
     if (n <= 1)
         return n;
 
-    int previous = 0;
-    int current  = 1;
+    int numbers [2];
 
-    for (int i = 0; i < n - 1; ++i) {
-        int tmp_previous = previous;
-        previous = current;
-        current = tmp_previous + current;
+    numbers[0] = 0;
+    numbers[1] = 1;
+
+    for (int i = 2; i <= n; ++i) {
+        numbers[i % 2] = numbers[0] + numbers[1];
     }
 
-    return current % 10;
+    return numbers[n % 2] % 10;
 }
+
+// int fibonacci_naive(int n) {
+//     if (n <= 1)
+//         return n;
+
+//     return fibonacci_naive(n - 1) + fibonacci_naive(n - 2);
+// }
+
+// void test_solution() {
+//     int a;
+//     int b;
+//     for (int n = 0; n < 20; ++n) {
+//         a = get_fibonacci_last_digit_naive(n);
+//         b = fibonacci_naive(n) % 10;
+//         std::cout << "answer: " << a << "    " << b << std::endl;
+//         assert(a == b);
+//     }
+// }
 
 int main() {
     int n;
     std::cin >> n;
-    int c = get_fibonacci_last_digit_naive(n);
+    int c = get_fibonacci_last_digit(n);
     std::cout << c << '\n';
-    }
+}
+
