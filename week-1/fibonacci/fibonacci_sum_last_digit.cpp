@@ -1,25 +1,43 @@
 #include <iostream>
 
-int fibonacci_sum_naive(long long n) {
-    if (n <= 1)
-        return n;
+//int fibonacci_sum_naive(long long n) {
+//    if (n <= 1)
+//        return n;
+//
+//    long long previous = 0;
+//    long long current  = 1;
+//    long long sum      = 1;
+//
+//    for (long long i = 0; i < n - 1; ++i) {
+//        long long tmp_previous = previous;
+//        previous = current;
+//        current = tmp_previous + current;
+//        sum += current;
+//    }
+//
+//    return sum % 10;
+//}
 
-    long long previous = 0;
-    long long current  = 1;
-    long long sum      = 1;
+int fibSum(long long n) {
+    if(n < 3)
+        return (int)n;
 
-    for (long long i = 0; i < n - 1; ++i) {
-        long long tmp_previous = previous;
-        previous = current;
-        current = tmp_previous + current;
-        sum += current;
+    int a = 1;
+    int b = 2;
+    int temp;
+    for(int i = 3; i <=n; i++) {
+        temp = (a + b + 1) % 10;
+        a = b;
+        b = temp;
     }
-
-    return sum % 10;
+    return b;
 }
 
 int main() {
     long long n = 0;
     std::cin >> n;
-    std::cout << fibonacci_sum_naive(n);
+    std::cout << fibSum(n);
+    return 0;
 }
+
+
