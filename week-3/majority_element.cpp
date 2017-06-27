@@ -2,9 +2,7 @@
 #include <iostream>
 #include <vector>
 
-using std::vector;
-
-int get_majority_element(vector<int> &a, int left, int right) {
+int get_majority_element(std::vector<int> &a, int left, int right) {
   if (left == right) return -1;
   if (left + 1 == right) return a[left];
   //write your code here
@@ -14,7 +12,7 @@ int get_majority_element(vector<int> &a, int left, int right) {
 int main() {
   int n;
   std::cin >> n;
-  vector<int> a(n);
+  std::vector<int> a(n);
   for (size_t i = 0; i < a.size(); ++i) {
     std::cin >> a[i];
   }

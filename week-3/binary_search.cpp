@@ -10,8 +10,10 @@ int binary_search(const std::vector<int> &arr, int numToFind) {
   while(left != right) {
     mid = (left + right) / 2;
 
-    if(arr[mid] == numToFind)
-      return mid;
+    if(arr[mid] == numToFind) {
+      break;
+    }
+
 
     if(arr[mid] < numToFind) {
       left = mid;
@@ -19,7 +21,7 @@ int binary_search(const std::vector<int> &arr, int numToFind) {
       right = mid;
     }
   }
-  return (arr[left] == numToFind) ? left : -1;
+  return (arr[mid] == numToFind) ? mid : -1;
 }
 
 int linear_search(const std::vector<int> &a, int x) {
