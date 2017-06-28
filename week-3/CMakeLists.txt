@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 project(week_3)
 
 set(CMAKE_CXX_STANDARD 14)
+
 set(CMAKE_CXX_FLAGS "-pipe -O2 -std=c++14 -lm")
 
 add_executable(main main.cpp)

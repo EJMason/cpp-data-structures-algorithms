@@ -7,7 +7,7 @@ int binary_search(const std::vector<int> &arr, int numToFind) {
   int mid = 0;
 
   while(left != right) {
-    mid = (left + right) / 2;
+    mid = left + (right - left)/2;
 
     if(arr[mid] == numToFind)
       return mid;
@@ -18,6 +18,26 @@ int binary_search(const std::vector<int> &arr, int numToFind) {
       right = mid;
   }
   return (arr[left] == numToFind) ? left : -1;
+}
+
+int binary_search_better(const std::vector<int> &arr, int num) {
+  int left = 0;
+  int right = ((int)arr.size()) - 1;
+  int mid = 0;
+
+  while (left <= right) {
+    mid = left + (right - left) / 2;
+
+    if (arr[mid] == num)
+      return mid;
+
+    if (arr[mid] < num) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return -1;
 }
 
 //int linear_search(const std::vector<int> &a, int x) {
@@ -44,9 +64,14 @@ int main() {
   std::vector<int> b(m);
   for (int i = 0; i < m; ++i)
     std::cin >> b[i];
-  
+
   for (int i = 0; i < m; ++i) {
     std::cout << binary_search(a, b[i]) << ' ';
+  }
+  std::cout << std::endl;
+  std::cout << "----" << std::endl;
+  for (int i = 0; i < m; ++i) {
+    std::cout << binary_search_better(a, b[i]) << ' ';
   }
 }
 
