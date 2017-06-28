@@ -3,7 +3,7 @@
 
 int binary_search(const std::vector<int> &arr, int numToFind) {
   int left = 0;
-  int right = (int)arr.size();
+  int right = ((int)arr.size()) - 1;
   int mid = 0;
 
   while(left != right) {
@@ -15,7 +15,7 @@ int binary_search(const std::vector<int> &arr, int numToFind) {
     if(arr[mid] < numToFind)
       left = mid+1;
     else
-      right = mid-1;
+      right = mid;
   }
   return (arr[left] == numToFind) ? left : -1;
 }
@@ -30,6 +30,7 @@ int binary_search(const std::vector<int> &arr, int numToFind) {
 
 // here is the main for the answer
 int main() {
+
   int n;
   std::cin >> n;
 
@@ -39,13 +40,13 @@ int main() {
 
   int m;
   std::cin >> m;
+
   std::vector<int> b(m);
   for (int i = 0; i < m; ++i)
     std::cin >> b[i];
-
-  for (int i = 0; i < m; ++i)
+  
+  for (int i = 0; i < m; ++i) {
     std::cout << binary_search(a, b[i]) << ' ';
-
-  return 0;
+  }
 }
 
