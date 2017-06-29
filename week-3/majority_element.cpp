@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#include <cassert>
-#include <random>
 
 //int get_majority_element(std::vector<int> &a, int left, int right);
 int linear_majority(std::vector<int> &a);
@@ -10,62 +8,15 @@ int prune(std::vector<int> arr);
 int sort_solution(std::vector<int> &arr);
 
 int main() {
-//  int n;
-//  std::cin >> n;
-//  std::vector<int> a(n);
-//  for (size_t i = 0; i < a.size(); ++i) {
-//    std::cin >> a[i];
-//  }
-
-//  int maj = get_majority_element(a, 0, (a.size() - 1));
-
-//  std::cout << maj << '\n';
-//  std::cout << (linear_majority(a) != -1) << '\n';
-
-  // =================== TESTING ======================= //
-  std::vector<int> a = {2,3,9,2,2};
-
-  int NUMBER_OF_ELEMENTS = 1000;
-  int LOWER_BOUND = 0;
-  int UPPER_BOUND = 2000;
-  int j = 0;
-  int i;
-
-  while(j == 0) {
-    std::vector<int> numbers;
-    int len = std::rand() % NUMBER_OF_ELEMENTS;
-    bool isMajor = len % 2 == 1;
-    i = 0;
-
-    if(isMajor) {
-      numbers.insert(numbers.end(), len/2 + 1, (std::rand() % UPPER_BOUND));
-      i = len / 2 + 1;
-    }
-
-    for (i; i < len; i++) {
-      numbers.push_back(std::rand() % UPPER_BOUND);
-    }
-
-    auto engine = std::default_random_engine{};
-    std::shuffle(std::begin(numbers), std::end(numbers), engine);
-    // ================= PREP IS COMPLETE ===================== //
-//    for(int j = 0; j < numbers.size(); j++) {
-//      std::cout << numbers[j] << "  ";
-//    }
-//    std:: cout << "\n";
-
-    int mine = linear_majority(numbers);
-    int correct = sort_solution(numbers);
-    std::cout << "Correct --> " << correct << " | " << mine << " <-- Mine" << std::endl;
-
-    assert(correct == mine);
-
-    std::vector<int>().swap(numbers);
-
-
+  int n;
+  std::cin >> n;
+  std::vector<int> a(n);
+  for (size_t i = 0; i < a.size(); ++i) {
+    std::cin >> a[i];
   }
-
-  std::cout << sort_solution(a);
+//  int maj = get_majority_element(a, 0, (a.size() - 1));
+//  std::cout << linear_majority(a) << '\n';
+  std::cout << (linear_majority(a) != -1) << '\n';
 
 }
 
@@ -106,7 +57,6 @@ int prune(std::vector<int> arr) {
       }
     }
   }
-
   if(majors.size() == 0 && extra != -1) majors.push_back(extra);
 
   return prune(majors);
