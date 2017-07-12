@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
 #include <algorithm>
 
 
@@ -9,6 +10,29 @@ int optimal_weight(int W, const std::vector<int> &w) {
   for (size_t i = 0; i < w.size(); ++i) {
     if (current_weight + w[i] <= W) {
       current_weight += w[i];
+    }
+  }
+  return current_weight;
+}
+
+int weight(int W, std::vector<int> &m) {
+
+  int current_weight = 0;
+  int temp;
+  for (int i = 0; i < m.size(); i++) {
+    for (int j = i + 1; j < m.size(); j++) {
+      if (m[i] < m[j]) {
+        temp = m[j];
+        m[j] = m[i];
+        m[i] = temp;
+      }
+    }
+  }
+
+  for (size_t i = 0; i < m.size(); ++i) {
+
+    if (current_weight + m[i] <= W) {
+      current_weight += m[i];
     }
   }
   return current_weight;
@@ -33,14 +57,29 @@ int optimalGold(int W, const std::vector<int> &values) {
     while(++i < currentValue)
       (*curr)[i] = prev->at(i);
 
+    std::cout << "GO " << currentValue << std::endl;
     for(i; i <= W; i++) {
+
       newPossibleBest = currentValue + prev->at(i-currentValue);
       prevBest = prev->at(i);
 
       curr->at(i) = std::max(newPossibleBest, prevBest);
     }
+
+    std::cout << "Prev: ";
+    for(int j = 0; j < prev->size(); j++){
+      std::cout << prev->at(j) << " ";
+    }
+    std::cout << "\n";
+
+    std::cout << "Curr: ";
+    for(int j = 0; j < curr->size(); j++){
+      std::cout << curr->at(j) << " ";
+    }
+    std::cout << "\n";
   }
-  solution = curr->back();
+
+  solution = prev->back();
 
   temp = NULL;
   curr = NULL;
@@ -52,12 +91,47 @@ int optimalGold(int W, const std::vector<int> &values) {
   return solution;
 }
 
+//void test_solution() {
+//  int randomBagTotal;
+//  int randomElementsTotal;
+//  int mine, greedy;
+//  std::vector<int> randomElements;
+//
+//  while (true) {
+//    randomBagTotal = 1 + (rand() % 50);
+//    randomElementsTotal = 3 + (rand() % 8);
+//
+//    std::cout << "Bag Size: " << randomBagTotal << "  Values: " << std::endl;
+//    std::cout << "[ ";
+//    for(int i = 0; i <=randomElementsTotal; i++) {
+//      randomElements.push_back(1 + (rand() % 30));
+//      std::cout << randomElements.back() << " ";
+//    }
+//    std::cout << "]\n" << std::endl;
+//
+//
+//    mine = optimalGold(randomBagTotal, randomElements);
+//    greedy = weight(randomBagTotal, randomElements);
+//
+//    std::cout << mine << " | " << greedy << std::endl;
+//    assert(mine == greedy);
+//    std::cout << std::endl;
+//
+//    randomElements = std::vector<int>();
+//  }
+//}
+
+//int main() {
+//  int n, W;
+//  std::cin >> W >> n;
+//  std::vector<int> w(n);
+//  for (int i = 0; i < n; i++) {
+//    std::cin >> w[i];
+//  }
+//  std::cout << optimalGold(W, w) << '\n';
+//}
+
 int main() {
-  int n, W;
-  std::cin >> W >> n;
-  std::vector<int> w(n);
-  for (int i = 0; i < n; i++) {
-    std::cin >> w[i];
-  }
-  std::cout << optimalGold(W, w) << '\n';
+  test_solution();
+  return 0;
 }
